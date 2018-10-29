@@ -21,8 +21,8 @@ DIET_PLAN=(
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    height = models.IntegerField(blank=True)
-    weight = models.IntegerField(blank=True)
+    height = models.IntegerField(null=True,blank=True)
+    weight = models.IntegerField(null=True,blank=True)
     body_type = models.CharField(
         choices=MEAL_TYPE,
         blank=True,
@@ -32,11 +32,17 @@ class Profile(models.Model):
         blank=True,
         max_length=40)
 
-@receiver(post_save,sender=User)
-def create_user_profile(sender,instance,created,**kwargs):
+# @receiver(post_save,sender=User)
+# def create_user_profile(sender,instance,created,**kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+
+# @receiver(post_save,sender=User)
+# def save_user_profile(sender,instance,**kwargs):
+#     instance.profile.save()
+
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-
-@receiver(post_save,sender=User)
-def save_user_profile(sender,instance,**kwargs):
     instance.profile.save()
