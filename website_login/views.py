@@ -15,9 +15,10 @@ def signup(request):
 		if form.is_valid():
 			user=form.save()
 			user.refresh_from_db()
-			user.profile.height=form.cleaned_data.get('height')
-			user.profile.weight=form.cleaned_data.get('weight')
+			# user.profile.height=form.cleaned_data.get('height')
+			# user.profile.weight=form.cleaned_data.get('weight')
 			# username=form.cleaned_data('username')
+			user.profile.birt_date = form.cleaned_data.get('birth_date')
 			user.save()
 			raw_password=form.cleaned_data.get('password1')
 			user=authenticate(username=user.username,password=raw_password)
