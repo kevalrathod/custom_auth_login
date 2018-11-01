@@ -21,6 +21,7 @@ DIET_PLAN=(
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email_confirmed = models.BooleanField(default=False)
     height = models.IntegerField(null=True,blank=True)
     weight = models.IntegerField(null=True,blank=True)
     body_type = models.CharField(
@@ -31,7 +32,8 @@ class Profile(models.Model):
         choices=DIET_PLAN,
         blank=True,
         max_length=40)
-
+    bith_date = models.DateField(null=True,blank=True)
+    
 # @receiver(post_save,sender=User)
 # def create_user_profile(sender,instance,created,**kwargs):
 #     if created:
