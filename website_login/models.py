@@ -20,8 +20,10 @@ DIET_PLAN=(
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email_confirmed = models.BooleanField(default=False)
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_name= models.CharField(max_length=40)
+    upassword = models.CharField(max_length=40)
+    email = models.BooleanField(default=False)
     height = models.IntegerField(null=True,blank=True)
     weight = models.IntegerField(null=True,blank=True)
     body_type = models.CharField(
@@ -37,14 +39,14 @@ class Profile(models.Model):
 # @receiver(post_save,sender=User)
 # def create_user_profile(sender,instance,created,**kwargs):
 #     if created:
-#         Profile.objects.create(user=instance)
+#         Profile.objects.create(user=instance) 
 
 # @receiver(post_save,sender=User)
 # def save_user_profile(sender,instance,**kwargs):
 #     instance.profile.save()
 
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
+# @receiver(post_save, sender=User)
+# def update_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+#     instance.profile.save()
