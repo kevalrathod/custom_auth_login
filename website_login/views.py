@@ -39,7 +39,7 @@ def login(request):
             user = Profile.objects.get(user_name=user_name,upassword=upassword)
             if(user):
                 print('USEr found in DB')
-                return HttpResponseRedirect("/home/")
+                return render(request,'profiles/home.html',{'login_user': user})
         except Exception as e:
             print('profile does not exists')
     else:
@@ -48,4 +48,4 @@ def login(request):
 
 
 def logout(request):
-    pass
+    return render(request,'profiles/login.html')
