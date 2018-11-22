@@ -21,7 +21,13 @@ def signup(request):
         if form.is_valid():
             user_name=request.POST['user_name']
             upassword = request.POST['upassword']
-            new_user = Profile(user_name=user_name,upassword=upassword)
+            email= request.POST['email']
+            height=request.POST['height']
+            weight=request.POST['weight']
+            print(height)
+            print(weight)
+            print(email)
+            new_user = Profile(user_name=user_name,upassword=upassword,email=email,height=height,weight=weight)
             new_user.save()
             print('mark1')
             return HttpResponseRedirect("/login/")
